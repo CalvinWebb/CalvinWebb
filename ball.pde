@@ -8,7 +8,7 @@ public class Ball {
   float ySpeed;
   float xSpeed;
 
-  Ball(int xpos, int ypos, int cwid, int chei) {
+  Ball(float xpos, float ypos, float cwid, float chei) {
     this.xpos = xpos;
     this.ypos = ypos;
     this.cwid = cwid;
@@ -38,7 +38,7 @@ public class Ball {
       ySpeed *= -0.85;
       //this.xSpeed *= 0.75;
       if (xpos >= width/2 && xpos <= width/2+100) {
-        ySpeed *= 100;
+        ySpeed *= 10;
       }
     } else if (ypos <= 0 +radius) {
       ypos = 0+radius;

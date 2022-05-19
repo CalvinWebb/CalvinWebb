@@ -1,9 +1,10 @@
 import java.util.Collection;
-import processing.sound.*;
+//import processing.sound.*;
 Pop start;
 Ball[] balls = new Ball[max_balls];
 
 public static boolean play;
+public static boolean dragged = false;
 
 public static color primary = (45);
 public static color secondary = (95);
@@ -14,8 +15,12 @@ public static float gravity = 1;
 public static int max_balls = 500;
 public static int ball_counter = 0;
 
-public boolean vel = false;
+public boolean vel = true;
 
+public static float px;
+public static float py;
+public static float pw;
+public static float ph;
 
 //public static font = loadFont();
 
@@ -24,7 +29,11 @@ void setup() {
   fullScreen(); 
   noCursor();
   frameRate(60);
-  start = new Pop(width-(width/4), height/10, (width/4)-(width/6), height/5);
+  float px = width-(width/4);
+  float py = height/10;
+  float pw = (width/4)-(width/6);
+  float ph = height/5;
+  start = new Pop(px, py, pw, ph);
 }
   
 void draw() {
@@ -37,7 +46,7 @@ void draw() {
     stage();
     tramp();
     start.render();
-    start.drag();
+    start.setCoords(px, py);
     for (int i=0;i<ball_counter;i++) {
       balls[i].render();
       balls[i].move();
@@ -68,6 +77,24 @@ void opening() {
   if (mousePressed) {
     play = true;
   }
+}
+
+void mouseDragged() {
+    System.out.println(mouseX);
+    System.out.println(mouseY);
+    System.out.println((px+(pw-10)));
+    System.out.println((py+(ph-10)));
+    if (((mouseX > px && mouseX < px + 100/*pw-10*/) && (mouseY > py && mouseY < py + 100/*ph-10*/))) {
+        System.out.println("Alive");
+        dragged = true;
+    }
+    if (dragged == true) {
+        px = mouseX; //+ ((rwid + xpos)-mouseX);
+        py = mouseY; //+ ((rhei + ypos)-mouseY);
+        System.out.println(px);
+        System.out.println(py);
+    }
+    dragged = false;
 }
 
 void stage() {
