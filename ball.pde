@@ -16,7 +16,7 @@ public class Ball {
     this.ySpeed = ySpeed;
     this.xSpeed = xSpeed;
     this.radius = cwid/2;
-    this.xSpeed = 0;
+    this.xSpeed = 10;
     render();
   }
 
@@ -28,7 +28,6 @@ public class Ball {
 
   void move() {
     noStroke();
-    xSpeed = 10;
     ySpeed += gravity;
     ypos += ySpeed;
     xpos += xSpeed;
@@ -36,16 +35,21 @@ public class Ball {
     if (ypos >= height -100-radius) {
       ypos = height - 100 - radius;
       ySpeed *= -0.85;
-      //this.xSpeed *= 0.75;
+      this.xSpeed *= 0.95;
       if (xpos >= width/2 && xpos <= width/2+100) {
-        ySpeed *= 10;
+        ySpeed *= 2;
+        xSpeed *= 1.5;
       }
     } else if (ypos <= 0 +radius) {
       ypos = 0+radius;
       ySpeed *= -0.85;
     }
     if (xpos >= width) {
-      xpos = 0;
+      xpos = width - radius;
+      xSpeed *= -0.50;
+    } else if (xpos <= 0) {
+        xpos = radius;
+        xSpeed *= -0.50;    
     }
   }
 

@@ -21,6 +21,9 @@ public static float px;
 public static float py;
 public static float pw;
 public static float ph;
+public static float difx;
+public static float dify;
+
 
 //public static font = loadFont();
 
@@ -29,10 +32,10 @@ void setup() {
   fullScreen(); 
   noCursor();
   frameRate(60);
-  float px = width-(width/4);
-  float py = height/10;
-  float pw = (width/4)-(width/6);
-  float ph = height/5;
+  px = width-(width/4);
+  py = height/10;
+  pw = (width/4)-(width/6);
+  ph = height/5;
   start = new Pop(px, py, pw, ph);
 }
   
@@ -80,17 +83,21 @@ void opening() {
 }
 
 void mouseDragged() {
+    /*
     System.out.println(mouseX);
     System.out.println(mouseY);
     System.out.println((px+(pw-10)));
     System.out.println((py+(ph-10)));
+    */
     if (((mouseX > px && mouseX < px + 100/*pw-10*/) && (mouseY > py && mouseY < py + 100/*ph-10*/))) {
         System.out.println("Alive");
         dragged = true;
     }
     if (dragged == true) {
-        px = mouseX; //+ ((rwid + xpos)-mouseX);
-        py = mouseY; //+ ((rhei + ypos)-mouseY);
+        difx = mouseX - px;
+        dify = mouseY - py;
+        px = mouseX - difx; //+ ((rwid + xpos)-mouseX);
+        py = mouseY - dify; //+ ((rhei + ypos)-mouseY);
         System.out.println(px);
         System.out.println(py);
     }
