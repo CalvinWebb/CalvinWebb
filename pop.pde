@@ -15,9 +15,9 @@ public class Pop {
   void render() {
     fill(secondary); 
     rect(xpos, ypos, rwid, rhei);
-    textAlign(CENTER);
+    textAlign(LEFT);
     fill(255);
-    text("Options", xpos+50, ypos+50);
+    text("Collisions and Momentum\n This model simulates 2D\n collisions between circles.\n To spawn balls, press 'e' \nand a ball will spawn at \nyour cursor location.\n The white line you see \non each ball is its \nvelocity visualized.", xpos+(width/60), ypos+50);
   }
 
   void setCoords(float x, float y) {

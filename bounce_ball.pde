@@ -32,9 +32,9 @@ void setup() {
   size(displayWidth, displayHeight);
   noCursor();
   frameRate(60);
-  px = width-(width/5);
+  px = width-(width/3.5);
   py = height/26;
-  pw = (width/5)-(width/60);
+  pw = (width/3.5)-(width/60);
   ph = height/2;
   start = new Pop(px, py, pw, ph);
 }
@@ -48,31 +48,27 @@ void draw() {
     // add fade out
     stage();
     //tramp();
-    /*
-    pop out
     start.render();
     start.setCoords(px, py);
-    */
     for (int i=0; i<ball_counter; i++) {
       balls[i].render();
       if (vel) {
         balls[i].velo();
       }
     }
-    for (int c=0; c<1; c++) {
-      for (int i=0; i<ball_counter; i++) {
+    for (int i=0; i<ball_counter; i++) {
         for (int j=0; j<ball_counter; j++) {
-          if (i != j) {
-            float dist = balls[i].coords.dist(balls[j].coords);
-            if (dist < ball_rad) {
-              PVector colS = PVector.sub(balls[i].coords, balls[j].coords);
-              PVector n = PVector.div(colS, dist);
-              float delta = ball_rad+0.01 - dist;
-              balls[i].coords.add(PVector.mult(PVector.mult(n, delta), 0.5));
-              balls[j].coords.sub(PVector.mult(PVector.mult(n, delta), 0.5));
-              PVector bspeed =  new PVector(balls[i].speed.x, balls[i].speed.y);
-              balls[i].speed = new PVector(balls[j].speed.x, balls[j].speed.y);
-              balls[j].speed = bspeed;
+            if (i != j) {
+                float dist = balls[i].coords.dist(balls[j].coords);
+                if (dist < ball_rad) {
+                PVector colS = PVector.sub(balls[i].coords, balls[j].coords);
+                PVector n = PVector.div(colS, dist);
+                float delta = ball_rad+0.01 - dist;
+                balls[i].coords.add(PVector.mult(PVector.mult(n, delta), 0.5));
+                balls[j].coords.sub(PVector.mult(PVector.mult(n, delta), 0.5));
+                PVector bspeed =  new PVector(balls[i].speed.x, balls[i].speed.y);
+                balls[i].speed = new PVector(balls[j].speed.x, balls[j].speed.y);
+                balls[j].speed = bspeed;
             }
           }
         }
@@ -80,7 +76,6 @@ void draw() {
       }
     }
     cursor();
-  }
 }
 
 void keyReleased() {
